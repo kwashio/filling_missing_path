@@ -84,7 +84,7 @@ if __name__ == '__main__':
     dir_index = pickle_load('work/dir_index.dump')
 
     lemma_embed = np.load('work/glove50.npy')
-    counts = pickle_load('target_path_count.dump')
+    counts = pickle_load('unsp_target_path_count.dump')
 
     n_lemma = len(lemma_index)
     n_pos = len(pos_index)
