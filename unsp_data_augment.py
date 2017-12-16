@@ -88,7 +88,7 @@ def data_aug(model, data, k, target_path,
         paths = [(path2indexed(p, lemma_index, pos_index, dep_index, dir_index), c)
                  for (p, c) in paths.items()]
         path_data[i] += paths
-    print(path_data)
+
     return (w1s, w2s, path_data, labels)
 
 
