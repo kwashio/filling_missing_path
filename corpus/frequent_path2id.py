@@ -1,7 +1,4 @@
 # coding:utf-8
-"""
-だいたい５回以上出た頻出pathのid辞書を作成する。
-"""
 
 import pickle
 

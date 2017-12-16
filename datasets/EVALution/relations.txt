@@ -1,0 +1,7 @@
+MadeOf	0
+HasA	1
+Synonym	2
+HasProperty	3
+IsA	4
+Antonym	5
+PartOf	6

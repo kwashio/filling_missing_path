@@ -1,0 +1,4 @@
+coord	0
+random	1
+hyper	2
+mero	3

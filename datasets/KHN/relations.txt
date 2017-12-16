@@ -1,0 +1,4 @@
+sibl	0
+hypo	1
+mero	2
+false	3

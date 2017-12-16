@@ -1,7 +1,5 @@
 # coding: utf-8
-"""
-path_idのtripletfileを辞書へ
-"""
+
 from collections import defaultdict
 import pickle
 import argparse

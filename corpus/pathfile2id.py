@@ -1,7 +1,5 @@
 # coding: utf-8
-"""
-path_to_idとlemma_indexを用いて、triplet_fileをindex化
-"""
+
 
 import pickle
 import argparse

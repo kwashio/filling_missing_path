@@ -1,8 +1,5 @@
 # coding: utf-8
-"""
-lemma_indexとは別に、term_to_idを作成し、
-tripret_dicとdata_proccesingに用いる。
-"""
+
 
 import pickle
 import argparse
