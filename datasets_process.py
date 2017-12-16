@@ -83,7 +83,6 @@ def dataset2array(path, id_tripret, id_to_path, term_to_id,
                          for (p, c) in paths.items()]
             else:
                 paths = [([[0], [0], [0], [0]], 1)]
-                print(w1, w2)
 
             w1_seq.append(lemma_index.get(w1, 0))
             w2_seq.append(lemma_index.get(w2, 0))
