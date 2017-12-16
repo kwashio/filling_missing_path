@@ -440,6 +440,104 @@ class LexNET_Rep(Chain):
         return score
 
 
+class LexNET_with_Rep(Chain):
+    def __init__(self, path_encoder, w2p,
+                 n_class, n_w_vocab, emb_size,
+                 embed_initial=None, dropout=0):
+        super(LexNET_with_Rep, self).__init__()
+        with self.init_scope():
+            self.path_encoder = path_encoder
+
+            self.w2p = w2p
+            self.w2p.disable_update()
+
+            self.fully_connect = L.Linear(n_class)
+
+            self.embed = L.EmbedID(n_w_vocab, emb_size, embed_initial)
+
+            self.dropout = dropout
+            self.n_units = path_encoder.n_units
+
+    def __call__(self, w1, w2, paths_list):
+        concat_h = self.w2p.feature_extract(w1, w2)
+
+        w1v = self.embed(w1)
+        w2v = self.embed(w2)
+
+        path_reps = []
+        for paths in paths_list:
+            hx = None
+            cx = None
+            lemma_seq = [word_dropout(i[0][0], self.dropout) for i in paths]
+            pos_seq = [word_dropout(i[0][1], self.dropout) for i in paths]
+            dep_seq = [word_dropout(i[0][2], self.dropout) for i in paths]
+            dir_seq = [word_dropout(i[0][3], self.dropout) for i in paths]
+            count_seq = [i[1] for i in paths]
+
+            lemma_seq = [self.xp.array(l, dtype='i') for l in lemma_seq]
+            pos_seq = [self.xp.array(p, dtype='i') for p in pos_seq]
+            dep_seq = [self.xp.array(d, dtype='i') for d in dep_seq]
+            dir_seq = [self.xp.array(d, dtype='i') for d in dir_seq]
+            count_seq = F.reshape(self.xp.array(count_seq, dtype='f'), shape=(-1, 1))
+
+            path_vector = self.path_encoder(hx, cx,
+                                            lemma_seq, pos_seq, dep_seq, dir_seq, count_seq)
+            path_reps.append(F.reshape(path_vector, shape=(-1, self.n_units)))
+
+        path_reps = F.concat(path_reps, axis=0)
+        path_reps = F.reshape(path_reps, shape=(-1, self.n_units))
+        rep = F.concat([w1v, path_reps, concat_h, w2v], axis=1)
+        y = self.fully_connect(rep)
+        return y
+
+    def predict(self, w1, w2, paths_list):
+        with chainer.no_backprop_mode(), chainer.using_config('train', False):
+            concat_h = self.w2p.feature_extract(w1, w2)
+
+            w1v = self.embed(w1)
+            w2v = self.embed(w2)
+
+            path_reps = []
+            for paths in paths_list:
+                hx = None
+                cx = None
+                lemma_seq = [word_dropout(i[0][0], self.dropout) for i in paths]
+                pos_seq = [word_dropout(i[0][1], self.dropout) for i in paths]
+                dep_seq = [word_dropout(i[0][2], self.dropout) for i in paths]
+                dir_seq = [word_dropout(i[0][3], self.dropout) for i in paths]
+                count_seq = [i[1] for i in paths]
+
+                lemma_seq = [self.xp.array(l, dtype='i') for l in lemma_seq]
+                pos_seq = [self.xp.array(p, dtype='i') for p in pos_seq]
+                dep_seq = [self.xp.array(d, dtype='i') for d in dep_seq]
+                dir_seq = [self.xp.array(d, dtype='i') for d in dir_seq]
+                count_seq = F.reshape(self.xp.array(count_seq, dtype='f'), shape=(-1, 1))
+
+                path_vector = self.path_encoder(hx, cx,
+                                                lemma_seq, pos_seq, dep_seq, dir_seq, count_seq)
+                path_reps.append(F.reshape(path_vector, shape=(-1, self.n_units)))
+
+            path_reps = F.concat(path_reps, axis=0)
+            path_reps = F.reshape(path_reps, shape=(-1, self.n_units))
+            rep = F.concat([w1v, path_reps, concat_h, w2v], axis=1)
+            predicts = self.fully_connect(rep)
+
+        predicts = F.argmax(predicts, axis=1)
+        return chainer.cuda.to_cpu(predicts.data)
+
+    def evaluate(self, w1, w2, paths_list, labels):
+        n_test = len(w1)
+        predicts = []
+        for i in range(0, n_test, 100):
+            c_w1 = w1[i:i + 100]
+            c_w2 = w2[i:i + 100]
+            c_path = paths_list[i:i + 100]
+            c_predicts = self.predict(c_w1, c_w2, c_path)
+            predicts.append(c_predicts)
+        predicts = np.concatenate(predicts)
+        score = f1_score(y_pred=predicts, y_true=labels, average='weighted')
+        return score
+
 class Classifier(Chain):
     def __init__(self, predictor):
         super(Classifier, self).__init__()

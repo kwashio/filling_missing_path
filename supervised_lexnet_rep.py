@@ -114,12 +114,12 @@ if __name__ == '__main__':
             path_encoder = Path_Encoder(lstm)
 
             w2p = Unsp_Model(n_lemma_vocab=n_lemma, n_emb_size=50, n_units=100,
-                            counts=counts, init_embed=lemma_embed, k=5)
+                             counts=counts, init_embed=lemma_embed, k=5)
             serializers.load_npz(args.unsp, w2p)
 
-            lexnet_w2p = LexNET_withW2Pfeature(path_encoder, w2p, n_class=n_classes, n_w_vocab=n_lemma, emb_size=50,
-                                               embed_initial=lemma_embed,
-                                               dropout=d_r)
+            lexnet_w2p = LexNET_with_Rep(path_encoder, w2p, n_class=n_classes, n_w_vocab=n_lemma, emb_size=50,
+                                         embed_initial=lemma_embed,
+                                         dropout=d_r)
 
             model = Classifier(lexnet_w2p)
             if args.gpu >= 0:
