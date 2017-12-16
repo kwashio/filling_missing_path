@@ -19,7 +19,7 @@ alp = ['a', 'b', 'c', 'd', 'e', 'f',
        's', 't']
 terms = set()
 for i in alp:
-    with open(args.input_prefix+'_a{}_parsed.out'.format(i), 'r') as f:
+    with open(args.input_prefix+'_a{}_parsed'.format(i), 'r') as f:
         for line in f:
             w1, w2, path = line.strip().split('\t')
             terms.add(w1)
