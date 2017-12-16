@@ -18,7 +18,7 @@ if __name__ == '__main__':
 
             paths.append(path_id)
 
-    with open('corpus/id_to_path.dump', 'r') as f:
+    with open('corpus/id_to_path.dump', 'rb') as f:
         id_to_path = pickle.load(f)
 
     path_count = Counter(paths)
