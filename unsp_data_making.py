@@ -18,7 +18,7 @@ if __name__ == '__main__':
     w2_ids = []
     path_ids = []
     c = 0
-    with open('corpus/id_triples' 'r') as f:
+    with open('corpus/id_triples', 'r') as f:
         for line in f:
             c += 1
             print(c)
