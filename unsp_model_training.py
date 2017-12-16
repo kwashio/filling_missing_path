@@ -1,7 +1,5 @@
 # coding: utf-8
-"""
-word2pathの訓練
-"""
+
 import pickle
 import argparse
 import numpy as np

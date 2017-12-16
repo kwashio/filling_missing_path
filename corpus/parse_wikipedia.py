@@ -1,3 +1,7 @@
+# coding: utf-8
+"""
+We implement the parser with reference to the implementation of the previous study (https://github.com/vered1986/HypeNET/blob/v2/corpus/parse_wikipedia.py).
+"""
 
 import spacy
 

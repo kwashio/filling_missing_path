@@ -1,6 +1,7 @@
 This directory contains datasets and implementations of baseline models and our methods used in our papers.
 We used python 3.6.1.
 These codes require chainer==2.1.0, sklearn, numpy,  spacy==1.9.0, and h5py.
+This software includes the work that is distributed in the Apache License 2.0.
 
 --------------------------------------------------------------------------------------------------------------------
 Usage
@@ -23,12 +24,15 @@ Put your own corpus, such as wikipedia corpus, into /corpus and run;
 5. Augment path data with the model of P(path|w1, w2). For example;
 	$ python unsp_data_augment.py -d datasets -u unsp_model/unsp_model.model -k 1 -o datasets_aug1
 	
-Please copy relations.txt of each dataset into augmented one.
+6. Please copy relations.txt of each dataset into augmented one.
 	$ cp datasets/BLESS/relations.txt datasets_aug1/BLESS/	
 
-6. Run the supervised learning. For example;
+7. Run the supervised learning. For example;
 	NPB
 	$ python supervised_path_based.py --data_prefix datasets/BLESS -o result
+
+	NPB
+	$ python supervised_path_based.py --data_prefix datasets_aug1/BLESS -o result
 	
 	LexNET
 	$ python supervised_lexnet.py --data_prefix datasets/BLESS -o result
@@ -40,7 +44,9 @@ Please copy relations.txt of each dataset into augmented one.
 	$ python supervised_lexnet.py --data_prefix datasets_aug1/BLESS -o result
 	
 	LexNEt+Rep
-	$ 
+	$ python supervised_lexnet_rep.py --data_prefix datasets/BLESS -u unsp_model/unsp_model.model -o result
 	
+	LexNET+Aug+Rep
+	$ $ python supervised_lexnet_rep.py --data_prefix datasets_aug1/BLESS -u unsp_model/unsp_model.model -o result
 
 
