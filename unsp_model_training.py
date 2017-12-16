@@ -96,4 +96,4 @@ if __name__ == '__main__':
             with open(args.out + '/log.txt', 'a') as f:
                 f.write(cur_result + '\n')
 
-        serializers.save_npz(args.out + '/word2path.model', model)
+        serializers.save_npz(args.out + '/unsp_model.model', model)

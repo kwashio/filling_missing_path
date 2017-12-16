@@ -14,7 +14,8 @@ Put your own corpus, such as wikipedia corpus, into /corpus and run;
 2. Create unsupervised learning data.
 	$ ./unsp_data_creating.sh
 	
-
+3. Run the unsupervised learning of our model of P(path|w1, w2).
+	$ python unsp_model_training.py  
 
 
 
