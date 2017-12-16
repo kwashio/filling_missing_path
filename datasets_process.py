@@ -6,11 +6,6 @@ import numpy as np
 import argparse
 import spacy
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--dataset_prefix', '-d', type=str)
-parser.add_argument('--lemma_index', '-li', type=str)
-args = parser.parse_args()
-
 
 def edge_decompose(edge):
     direction = ' '
@@ -103,7 +98,7 @@ def dataset2array(path, id_tripret, id_to_path, term_to_id,
 
 
 if __name__ == '__main__':
-    with open(args.lemma_index, 'rb') as f:
+    with open('work/glove_index.dump', 'rb') as f:
         lemma_index = pickle.load(f)
     with open('work/pos_index.dump', 'rb') as f:
         pos_index = pickle.load(f)
@@ -120,7 +115,7 @@ if __name__ == '__main__':
         id_tripret = pickle.load(f)
 
     for sets in ['/BLESS', '/ROOT09', '/EVALution', '/KHN']:
-        path = args.dataset_prefix + sets
+        path = 'datasets' + sets
         train = path + '/train.tsv'
         test = path + '/test.tsv'
         val = path + '/val.tsv'

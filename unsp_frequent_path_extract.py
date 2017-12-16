@@ -7,8 +7,6 @@ import argparse
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data', '-d', type=str)
-    parser.add_argument('--path_count', '-pc', type=str)
     parser.add_argument('--frequency_rank', '-fr', type=int, default=30000)
     args = parser.parse_args()
 
