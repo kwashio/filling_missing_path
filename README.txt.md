@@ -20,8 +20,14 @@ Put your own corpus, such as wikipedia corpus, into /corpus and run;
 4. Process the datasets for supervised learning.
 	$ python datasets_process.py
 	
-5. Augment path data with the model of P(path|w1, w2).
-	$ 
+5. Augment path data with the model of P(path|w1, w2). For example;
+	$ python unsp_data_augment.py -d datasets -u unsp_model/unsp_model.model -k 1 -o datasets_aug1
 
+6. Run the supervised learning. For example;
+	NPB
+	$ python supervised_path_based.py --data_prefix datasets/BLESS -o result
+	
+	LexNET
+	$ python supervised_lexnet.py
 
 
