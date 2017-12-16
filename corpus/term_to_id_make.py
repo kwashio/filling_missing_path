@@ -5,6 +5,13 @@ tripret_dicとdata_proccesingに用いる。
 """
 
 import pickle
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('input_prefix', help='the Wikipedia dump file')
+args = parser.parse_args()
+
+
 
 alp = ['a', 'b', 'c', 'd', 'e', 'f',
        'g', 'h', 'i', 'j', 'k', 'l',
@@ -12,7 +19,7 @@ alp = ['a', 'b', 'c', 'd', 'e', 'f',
        's', 't']
 terms = set()
 for i in alp:
-    with open('wiki_a{}_parsed.out'.format(i), 'r') as f:
+    with open(args.input_prefix+'_a{}_parsed.out'.format(i), 'r') as f:
         for line in f:
             w1, w2, path = line.strip().split('\t')
             terms.add(w1)
