@@ -17,11 +17,8 @@ if __name__ == '__main__':
     w1_ids = []
     w2_ids = []
     path_ids = []
-    c = 0
     with open('corpus/id_triples', 'r') as f:
         for line in f:
-            c += 1
-            print(c)
 
             w1, w2, path = line.strip().split('\t')
 
