@@ -116,15 +116,14 @@ if __name__ == '__main__':
 
     # path
     counts = pickle_load('unsp_target_path_count.dump')
-    target_path = pickle_load('/home/washio/Unsp_path/work_for_word2path/target_path.dump')
+    target_path = pickle_load('unsp_target_path.dump')
 
     model = Word2Path(n_lemma_vocab=n_lemma, n_emb_size=50, n_units=100,
                       counts=counts, init_embed=lemma_embed)
     serializers.load_npz(args.unsp_model, model)
 
 
-   #for sets in ['/BLESS', '/ROOT09', '/EVALution', '/K&H+N']:
-    for sets in ['/BLESS', '/ROOT09', '/EVALution']:
+    for sets in ['/BLESS', '/ROOT09', '/EVALution', 'KHN']:
         data_path = args.data_folder + sets
         train = data_path + '/train_data.dump'
         test = data_path + '/test_data.dump'
