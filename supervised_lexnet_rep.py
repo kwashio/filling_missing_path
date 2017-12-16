@@ -5,7 +5,7 @@ import argparse
 import os
 import pickle
 
-from unsupervised_model_common import *
+from unsp_model_common import *
 from supervised_model_common import *
 
 
@@ -113,7 +113,7 @@ if __name__ == '__main__':
                             )
             path_encoder = Path_Encoder(lstm)
 
-            w2p = Word2Path(n_lemma_vocab=n_lemma, n_emb_size=50, n_units=100,
+            w2p = Unsp_Model(n_lemma_vocab=n_lemma, n_emb_size=50, n_units=100,
                             counts=counts, init_embed=lemma_embed, k=5)
             serializers.load_npz(args.unsp, w2p)
 
