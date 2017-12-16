@@ -14,7 +14,29 @@ wait
 
 python term_to_id_make.py $wiki_dump_file
 
-awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file'_aa'_parsed" > "paths_aa"
+for x in {a..t}
+do
+( awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file""_a"$x"_parsed" > paths"_a"$x ) &
+done
+wait
+
+#
+#awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file""_aa_parsed" > "paths_aa"
+#awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file""_ab_parsed" > "paths_ab"
+#awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file""_ac_parsed" > "paths_ac"
+#awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file""_ad_parsed" > "paths_ad"
+#awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file""_ae_parsed" > "paths_ae"
+#awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file""_af_parsed" > "paths_af"
+#awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file""_ag_parsed" > "paths_ag"
+#awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file""_ah_parsed" > "paths_ah"
+#awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file""_ai_parsed" > "paths_ai"
+#awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file""_aj_parsed" > "paths_aj"
+#awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file""_ak_parsed" > "paths_ak"
+#awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file""_al_parsed" > "paths_al"
+#awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file""_am_parsed" > "paths_am"
+#awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file""_an_parsed" > "paths_an"
+#awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file""_ao_parsed" > "paths_ao"
+#awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file""_ap_parsed" > "paths_ap"
 #awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "wiki_ab_parsed.out" > "paths_ab"
 #awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "wiki_ac_parsed.out" > "paths_ac"
 #awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "wiki_ad_parsed.out" > "paths_ad"
@@ -34,9 +56,6 @@ awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file'_aa
 #awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "wiki_ar_parsed.out" > "paths_ar"
 #awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "wiki_as_parsed.out" > "paths_as"
 #awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "wiki_at_parsed.out" > "paths_at"
-
-wait
-
 cat paths_a* > paths_temp;
 cat paths_temp | grep -v "$(printf '\t1$')" > frequent_paths_temp;
 awk -F$'\t' '{i[$1]+=$2} END{for(x in i){print x"\t"i[x]}}' frequent_paths_temp > paths;

@@ -21,7 +21,6 @@ def main():
 
             # Read the next paragraph
             for paragraph in f_in:
-                print(paragraph)
 
                 # Skip empty lines
                 paragraph = paragraph.replace("'''", '').strip()
