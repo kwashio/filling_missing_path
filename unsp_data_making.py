@@ -21,10 +21,12 @@ if __name__ == '__main__':
         for line in f:
 
             w1, w2, path = line.strip().split('\t')
+            w1 = id_to_term[int(w1)]
+            w2 = id_to_term[int(w2)]
 
-            if int(path) in target_path_id and id_to_term[int(w1)] in glove_index.keys() and id_to_term[int(w2)] in glove_index.keys():
-                w1_ids.append(int(w1))
-                w2_ids.append(int(w2))
+            if int(path) in target_path_id and w1 in glove_index.keys() and w2 in glove_index.keys():
+                w1_ids.append(glove_index[w1])
+                w2_ids.append(glove_index[w2])
                 path_ids.append(int(path))
 
     unsp_data = (w1_ids, w2_ids, path_ids)
