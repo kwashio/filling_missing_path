@@ -48,6 +48,7 @@ if __name__ == '__main__':
     with open(args.data_prefix + '/train_data.dump', 'rb') as f:
         train_data = pickle.load(f)
     train_w1s, train_w2s, train_paths, train_labels = train_data
+    train_paths = np.array(train_paths)
 
     with open(args.data_prefix + '/test_data.dump', 'rb') as f:
         test_data = pickle.load(f)
