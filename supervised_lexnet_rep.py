@@ -137,7 +137,7 @@ if __name__ == '__main__':
             e = 0
 
             while c_val <= 7:
-                perm = np.random.permutation(n_train)
+                perm = np.random.permutation(n_train).astype('i')
                 for i in range(0, n_train, args.batchsize):
                     c_w1s = xp.array(train_w1s[perm[i:i + args.batchsize]], dtype=xp.int32)
                     c_w2s = xp.array(train_w2s[perm[i:i + args.batchsize]], dtype=xp.int32)
