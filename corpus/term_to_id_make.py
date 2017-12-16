@@ -23,6 +23,10 @@ for i in alp:
             terms.add(w2)
 
 term_to_id = {w:i for (i, w) in enumerate(terms)}
+id_to_term = {i:w for (i, w) in enumerate(terms)}
 
 with open('term_to_id.dump', 'wb') as f:
+    pickle.dump(term_to_id,f)
+
+with open('id_to_term.dump', 'wb') as f:
     pickle.dump(term_to_id,f)
