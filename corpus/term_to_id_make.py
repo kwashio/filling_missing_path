@@ -29,4 +29,4 @@ with open('term_to_id.dump', 'wb') as f:
     pickle.dump(term_to_id,f)
 
 with open('id_to_term.dump', 'wb') as f:
-    pickle.dump(term_to_id,f)
+    pickle.dump(id_to_term,f)
