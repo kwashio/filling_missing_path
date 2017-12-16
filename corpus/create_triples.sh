@@ -12,3 +12,5 @@ do
 " ) &
 done
 wait
+
+python term_to_id_make.py $wiki_dump_file
