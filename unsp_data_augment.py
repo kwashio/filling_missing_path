@@ -2,7 +2,7 @@
 
 import argparse
 import pickle
-from unsupervised_model_common import *
+from unsp_model_common import *
 import numpy as np
 from chainer import serializers
 from collections import Counter
