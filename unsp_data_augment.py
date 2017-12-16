@@ -77,8 +77,10 @@ def data_aug(model, data, k, target_path,
     for i, predict_ids in enumerate(sorted_predict):
         predict_ids = Counter(predict_ids)
         paths = {target_path[path]:c for (path, c) in predict_ids.items()}
+        print(paths)
         paths = [(path2indexed(p, lemma_index, pos_index, dep_index, dir_index), c)
                  for (p, c) in paths.items()]
+        print(paths)
         path_data[i] += paths
 
     r_sorted_predict = path_predict(model, w2s, w1s, k)
