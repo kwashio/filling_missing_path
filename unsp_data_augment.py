@@ -123,7 +123,7 @@ if __name__ == '__main__':
     serializers.load_npz(args.unsp_model, model)
 
 
-    for sets in ['/BLESS', '/ROOT09', '/EVALution', 'KHN']:
+    for sets in ['/BLESS', '/ROOT09', '/EVALution', '/KHN']:
         data_path = args.data_folder + sets
         train = data_path + '/train_data.dump'
         test = data_path + '/test_data.dump'
