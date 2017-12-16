@@ -1,0 +1,13 @@
+anarchism	philosophy	X/NOUN/nsubj>_be/VERB/ROOT_<Y/NOUN/attr
+anarchism	philosophy	X/NOUN/nsubj>_be/VERB/ROOT_<Y/NOUN/attr_>advocate/VERB/relcl
+anarchism	society	X/NOUN/nsubj>_be/VERB/ROOT_<philosophy/NOUN/attr_<advocate/VERB/relcl_<Y/NOUN/dobj
+anarchism	society	X/NOUN/nsubj>_be/VERB/ROOT_<philosophy/NOUN/attr_<advocate/VERB/relcl_<Y/NOUN/dobj_>base/VERB/acl
+philosophy	society	X/NOUN/attr>_be/VERB/ROOT_<philosophy/NOUN/attr_<advocate/VERB/relcl_<Y/NOUN/dobj
+philosophy	society	X/NOUN/attr>_be/VERB/ROOT_<philosophy/NOUN/attr_<advocate/VERB/relcl_<Y/NOUN/dobj_>base/VERB/acl
+self	institution	X/NOUN/npadvmod>_govern/VERB/amod>_society/NOUN/ROOT_<base/VERB/acl_<on/ADP/prep_<Y/NOUN/pobj
+society	institution	X/NOUN/dobj>_advocate/VERB/ROOT_<society/NOUN/dobj_<base/VERB/acl_<on/ADP/prep_<Y/NOUN/pobj
+author	institution	X/NOUN/nsubj>_define/VERB/ROOT_<as/ADP/prep_<Y/NOUN/pobj
+author	institution	several/ADJ/amod<_X/NOUN/nsubj>_define/VERB/ROOT_<as/ADP/prep_<Y/NOUN/pobj
+author	institution	X/NOUN/nsubj>_define/VERB/ROOT_<as/ADP/prep_<Y/NOUN/pobj_>base/VERB/acl
+institution	association	X/NOUN/pobj>_as/ADP/ROOT_<institution/NOUN/pobj_<base/VERB/acl_<on/ADP/prep_<Y/NOUN/pobj
+anarchism	state	X/NOUN/nsubj>_hold/VERB/ROOT_<be/VERB/ccomp_<Y/NOUN/nsubj
