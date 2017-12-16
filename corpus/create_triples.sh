@@ -28,3 +28,5 @@ awk -F$'\t' '$2 >= 5 {print $1}' paths > frequent_paths
 python frequent_path2id.py
 
 python pathfile2id.py $wiki_dump_file
+
+cat $wiki_dump_file"_a"*"_parsed_id" > id_triples
