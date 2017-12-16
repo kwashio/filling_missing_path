@@ -5,7 +5,7 @@ import argparse
 
 if __name__ == '__main__':
 
-    with open('word2path_target_path_id.dump', 'rb') as f:
+    with open('unsp_target_path_id.dump', 'rb') as f:
         target_path_id = pickle.load(f)
 
     with open('work/glove_index.dump', 'rb') as f:
