@@ -31,4 +31,4 @@ python pathfile2id.py $wiki_dump_file
 
 cat $wiki_dump_file"_a"*"_parsed_id" > id_triples
 
-python pathfile2id.py id_triples
+python path_idfile2dic.py id_triples
