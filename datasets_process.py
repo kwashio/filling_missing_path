@@ -88,6 +88,7 @@ def dataset2array(path, id_tripret, id_to_path, term_to_id,
             w2_seq.append(lemma_index.get(w2, 0))
             paths_seq.append(paths)
             label_seq.append(label)
+            print(path_seq)
     w1_seq = np.array(w1_seq, dtype=np.int32)
     w2_seq = np.array(w2_seq, dtype=np.int32)
     paths_seq = np.array(paths_seq)
