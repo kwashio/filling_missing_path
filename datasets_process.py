@@ -91,7 +91,7 @@ def dataset2array(path, id_tripret, id_to_path, term_to_id,
             print(paths_seq)
     w1_seq = np.array(w1_seq, dtype=np.int32)
     w2_seq = np.array(w2_seq, dtype=np.int32)
-    paths_seq = np.array(paths_seq)
+    #paths_seq = np.array(paths_seq)
     label_seq = np.array(label_seq)
 
     return (w1_seq, w2_seq, paths_seq, label_seq)
