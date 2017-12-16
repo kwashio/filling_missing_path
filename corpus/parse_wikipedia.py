@@ -10,22 +10,8 @@ parser.add_argument('out_file', help='the output (parsed) file')
 args = parser.parse_args()
 
 def main():
-    """
-    Creates a "knowledge resource" from triplets file
-    """
-
-    # # Get the arguments
-    # #args = docopt("""Parse the Wikipedia dump and create a triplets file, each line is formatted as follows: X\t\Y\tpath
-    # Usage:
-    #     parse_wikipedia.py <in_file> <out_file>
-    #     <in_file> = the Wikipedia dump file
-    #     <out_file> = the output (parsed) file
-    # """)
 
     nlp = English()
-
-    # in_file = args['<in_file>']
-    # out_file = args['<out_file>']
 
     in_file = args.in_file
     out_file = args.out_file
@@ -49,10 +35,8 @@ def main():
                     dependency_paths = parse_sentence(sent)
                     if len(dependency_paths) > 0:
                         for path in dependency_paths:
-                            print(path)
                             path[0] = nlp(path[0])[0].lemma_
                             path[1] = nlp(path[1])[0].lemma_
-                        print(dependency_paths)
                         triple = '\n'.join(['\t'.join(path) for path in dependency_paths])
                         f_out.write(triple+'\n')
 
