@@ -107,7 +107,7 @@ if __name__ == '__main__':
         pos_index = pickle.load(f)
     with open('work/dep_index.dump', 'rb') as f:
         dep_index = pickle.load(f)
-    with open('ork/dir_index.dump', 'rb') as f:
+    with open('work/dir_index.dump', 'rb') as f:
         dir_index = pickle.load(f)
 
     lemma_index = pickle_load('work/glove_index.dump')
