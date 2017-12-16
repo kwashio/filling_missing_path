@@ -19,17 +19,14 @@ def main():
     with open(in_file, 'r') as f_in:
         with open(out_file, 'w') as f_out:
 
-            # Read the next paragraph
             for paragraph in f_in:
 
-                # Skip empty lines
                 paragraph = paragraph.replace("'''", '').strip()
                 if len(paragraph) == 0:
                     continue
 
                 parsed_par = nlp(paragraph)
 
-                # Parse each sentence separately
                 for sent in parsed_par.sents:
                     dependency_paths = parse_sentence(sent)
                     if len(dependency_paths) > 0:
@@ -44,7 +41,6 @@ def main():
 def parse_sentence(sent):
     indices = [(token, i, i) for i, token in enumerate(sent) if token.tag_[:2] == 'NN' and len(token.string.strip()) > 2]
 
-    # Get all dependency paths between nouns, up to length 4
     term_pairs = [(x[0], y[0]) for x in indices for y in indices if x[2] < y[1]]
     shortest_paths = [shortest_path(x, y) for x, y in term_pairs]
     paths = [path for path in shortest_paths if path is not None]
@@ -56,11 +52,6 @@ def parse_sentence(sent):
 
 
 def shortest_path(x, y):
-    """ Returns the shortest dependency path from x to y
-    :param x: x token
-    :param y: y token
-    :return: the shortest dependency path from x to y
-    """
 
     x_token = x
     y_token = y
@@ -69,11 +60,9 @@ def shortest_path(x, y):
     if not isinstance(y_token, spacy.tokens.token.Token):
         y_token = y_token.root
 
-    # Get the path from the root to each of the tokens
     hx = heads(x_token)
     hy = heads(y_token)
 
-    # Get the lowest common head
     i = -1
     for i in range(min(len(hx), len(hy))):
         if hx[i] is not hy[i]:
@@ -94,13 +83,11 @@ def shortest_path(x, y):
         lch_idx = i-1
         lch = hx[lch_idx]
 
-    # The path from x to the lowest common head
     hx = hx[lch_idx+1:]
     if lch and check_direction(lch, hx, lambda h: h.lefts):
         return None
     hx = hx[::-1]
 
-    # The path from the lowest common head to y
     hy = hy[lch_idx+1:]
     if lch and check_direction(lch, hy, lambda h: h.rights):
         return None
@@ -109,11 +96,6 @@ def shortest_path(x, y):
 
 
 def heads(token):
-    """
-    Return the heads of a token, from the root down to immediate head
-    :param token:
-    :return:
-    """
     t = token
     hs = []
     while t is not t.head:
@@ -123,26 +105,11 @@ def heads(token):
 
 
 def check_direction(lch, hs, f_dir):
-    """
-    Make sure that the path between the term and the lowest common head is in a certain direction
-    :param lch: the lowest common head
-    :param hs: the path from the lowest common head to the term
-    :param f_dir: function of direction
-    :return:
-    """
     return any(modifier not in f_dir(head) for head, modifier in zip([lch] + hs[:-1], hs))
 
 
 def get_satellite_links(x, hx, lch, hy, y):
-    """
-    Add the "satellites" - single links not already contained in the dependency path added on either side of each noun
-    :param x: the X token
-    :param y: the Y token
-    :param hx: X's head tokens
-    :param hy: Y's head tokens
-    :param lch: the lowest common ancestor of X and Y
-    :return: more paths, with satellite links
-    """
+
     paths = [(None, x, hx, lch, hy, y, None)]
 
     x_lefts = [tok for tok in x.lefts]
@@ -157,11 +124,7 @@ def get_satellite_links(x, hx, lch, hy, y):
 
 
 def edge_to_string(token, is_head=False):
-    """
-    Converts the token to an edge string representation
-    :param token: the token
-    :return: the edge string
-    """
+
     t = token
     if not isinstance(token, spacy.tokens.token.Token):
         t = token.root
@@ -170,12 +133,7 @@ def edge_to_string(token, is_head=False):
 
 
 def argument_to_string(token, edge_name):
-    """
-    Converts the argument token (X or Y) to an edge string representation
-    :param token: the X or Y token
-    :param edge_name: 'X' or 'Y'
-    :return:
-    """
+
     if not isinstance(token, spacy.tokens.token.Token):
         token = token.root
 
@@ -183,25 +141,15 @@ def argument_to_string(token, edge_name):
 
 
 def direction(dir):
-    """
-    Print the direction of the edge
-    :param dir: the direction
-    :return: a string representation of the direction
-    """
-    # Up to the head
+
     if dir == UP:
         return '>'
-    # Down from the head
     elif dir == DOWN:
         return '<'
 
 
 def token_to_string(token):
-    """
-    Convert the token to string representation
-    :param token:
-    :return:
-    """
+
     if not isinstance(token, spacy.tokens.token.Token):
         return ' '.join([t.string.strip().lower() for t in token])
     else:
@@ -209,11 +157,7 @@ def token_to_string(token):
 
 
 def token_to_lemma(token):
-    """
-    Convert the token to string representation
-    :param token: the token
-    :return: string representation of the token
-    """
+
     if not isinstance(token, spacy.tokens.token.Token):
         return token_to_string(token)
     else:
@@ -221,10 +165,7 @@ def token_to_lemma(token):
 
 
 def clean_path(set_x, x, hx, lch, hy, y, set_y):
-    """
-    Filter out long paths and pretty print the short ones
-    :return: the string representation of the path
-    """
+
     set_path_x = []
     set_path_y = []
     lch_lst = []
@@ -234,15 +175,14 @@ def clean_path(set_x, x, hx, lch, hy, y, set_y):
     if set_y:
         set_path_y = [direction(UP) + edge_to_string(set_y)]
 
-    # X is the head
     if isinstance(x, spacy.tokens.token.Token) and lch == x:
         dir_x = ''
         dir_y = direction(DOWN)
-    # Y is the head
+
     elif isinstance(y, spacy.tokens.token.Token) and lch == y:
         dir_x = direction(UP)
         dir_y = ''
-    # X and Y are not heads
+
     else:
         lch_lst = [edge_to_string(lch, is_head=True)] if lch else []
         dir_x = direction(UP)
@@ -261,7 +201,6 @@ def clean_path(set_x, x, hx, lch, hy, y, set_y):
         return None
 
 
-# Constants
 MAX_PATH_LEN = 4
 UP = 1
 DOWN = 2
