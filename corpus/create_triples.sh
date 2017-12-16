@@ -26,3 +26,5 @@ awk -F$'\t' '{i[$1]+=$2} END{for(x in i){print x"\t"i[x]}}' frequent_paths_temp 
 awk -F$'\t' '$2 >= 5 {print $1}' paths > frequent_paths
 
 python frequent_path2id.py
+
+python pathfile2id.py $wiki_dump_file
