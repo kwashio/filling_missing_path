@@ -7,7 +7,7 @@ This software includes the work that is distributed in the Apache License 2.0.
 # Usage
 Please follow the process below.
 
-1. Prepare GloVe. Please download 50-d GloVe from https://nlp.stanford.edu/projects/glove/, and put glove.6B.50d.txt into /work and run glove_process.py
+1. Prepare GloVe. Please download 50-d GloVe from https://nlp.stanford.edu/projects/glove/, and put glove.6B.50d.txt into /work and run glove_process.py  
 	$ python glove_process.py -g glove.6B.50d.txt
 
 2. Create (w1, w2, path) triples from your own corpus.
