@@ -1,10 +1,10 @@
-This directory contains datasets and implementations of baseline models and our methods used in our papers.
+This directory contains datasets and implementations of baseline models and our methods used in our papers [Filling Missing Paths: Modeling Co-occurrences of Word Pairs and Dependency Paths for Recognizing Lexical Semantic Relations][1].
 We used python 3.6.1.
 These codes require chainer==2.1.0, sklearn, numpy,  spacy==1.9.0, and h5py.
 This software includes the work that is distributed in the Apache License 2.0.
 
 --------------------------------------------------------------------------------------------------------------------
-Usage
+# Usage
 Please follow the process below.
 
 1. Prepare GloVe. Please download 50-d GloVe from https://nlp.stanford.edu/projects/glove/, and put glove.6B.50d.txt into /work and run glove_process.py
@@ -49,7 +49,8 @@ Put your own corpus, such as wikipedia corpus, into /corpus and run;
 	LexNET+Rep
 	$ python supervised_lexnet_rep.py --data_prefix datasets/BLESS -u unsp_model/unsp_model.model -o result
 	
-	LexNET+Aug+Rep  
+	LexNET+Aug+Rep
 	$ $ python supervised_lexnet_rep.py --data_prefix datasets_aug1/BLESS -u unsp_model/unsp_model.model -o result
 
 
+[1]:http://aclweb.org/anthology/N18-1102
