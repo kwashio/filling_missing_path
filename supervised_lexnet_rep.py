@@ -4,6 +4,7 @@
 import argparse
 import os
 import pickle
+import numpy as np
 
 from unsp_model_common import *
 from supervised_model_common import *
