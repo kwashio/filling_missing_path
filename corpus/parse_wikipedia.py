@@ -34,9 +34,6 @@ def main():
                 for sent in parsed_par.sents:
                     dependency_paths = parse_sentence(sent)
                     if len(dependency_paths) > 0:
-                        # for path in dependency_paths:
-                        #     path[0] = nlp(path[0])[0].lemma_
-                        #     path[1] = nlp(path[1])[0].lemma_
                         triple = '\n'.join(['\t'.join(path) for path in dependency_paths])
                         f_out.write(triple+'\n')
 
