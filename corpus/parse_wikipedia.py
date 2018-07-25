@@ -26,7 +26,7 @@ def main():
             for paragraph in f_in:
 
                 paragraph = paragraph.replace("'''", '').strip()
-                if len(paragraph) == 0:
+                if len(paragraph) == 0 or paragraph.startswith('<'):
                     continue
 
                 parsed_par = nlp(paragraph)
