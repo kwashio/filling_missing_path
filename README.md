@@ -50,7 +50,7 @@ Put your own corpus, such as wikipedia corpus, into /corpus and run;
 	$ python supervised_lexnet_rep.py --data_prefix datasets/BLESS -u unsp_model/unsp_model.model -o result
 
 	LexNET+Aug+Rep  
-	$ $ python supervised_lexnet_rep.py --data_prefix datasets_aug1/BLESS -u unsp_model/unsp_model.model -o result
+	$ python supervised_lexnet_rep.py --data_prefix datasets_aug1/BLESS -u unsp_model/unsp_model.model -o result
 
 
 [1]:http://aclweb.org/anthology/N18-1102
