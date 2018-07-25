@@ -28,7 +28,7 @@ Put your own corpus, such as wikipedia corpus, into /corpus and run;
 	$ python unsp_data_augment.py -d datasets -u unsp_model/unsp_model.model -k 1 -o datasets_aug1
 	
 7. Please copy relations.txt of each dataset into augmented one.
-	$ cp datasets/BLESS/relations.txt datasets_aug1/BLESS/	
+	$ cp datasets/BLESS/relations.txt datasets_aug1/BLESS/
 
 8. Run the supervised learning. For example;
 	NPB
@@ -36,7 +36,7 @@ Put your own corpus, such as wikipedia corpus, into /corpus and run;
 
 	NPB
 	$ python supervised_path_based.py --data_prefix datasets_aug1/BLESS -o result
-	
+
 	LexNET
 	$ python supervised_lexnet.py --data_prefix datasets/BLESS -o result
 	
@@ -49,7 +49,7 @@ Put your own corpus, such as wikipedia corpus, into /corpus and run;
 	LexNET+Rep
 	$ python supervised_lexnet_rep.py --data_prefix datasets/BLESS -u unsp_model/unsp_model.model -o result
 	
-	LexNET+Aug+Rep
+	LexNET+Aug+Rep  
 	$ $ python supervised_lexnet_rep.py --data_prefix datasets_aug1/BLESS -u unsp_model/unsp_model.model -o result
 
 
