@@ -34,9 +34,9 @@ def main():
                 for sent in parsed_par.sents:
                     dependency_paths = parse_sentence(sent)
                     if len(dependency_paths) > 0:
-                        for path in dependency_paths:
-                            path[0] = nlp(path[0])[0].lemma_
-                            path[1] = nlp(path[1])[0].lemma_
+                        # for path in dependency_paths:
+                        #     path[0] = nlp(path[0])[0].lemma_
+                        #     path[1] = nlp(path[1])[0].lemma_
                         triple = '\n'.join(['\t'.join(path) for path in dependency_paths])
                         f_out.write(triple+'\n')
 
@@ -200,7 +200,7 @@ def clean_path(set_x, x, hx, lch, hy, y, set_y):
                                 lch_lst +
                                 [direction(DOWN) + edge_to_string(token) for token in hy] +
                                 [dir_y + argument_to_string(y, 'Y')] + set_path_y)
-        return token_to_string(x), token_to_string(y), cleaned_path
+        return token_to_lemma(x), token_to_lemma(y), cleaned_path
     else:
         return None
 

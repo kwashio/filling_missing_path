@@ -10,18 +10,17 @@ if __name__ == '__main__':
     parser.add_argument('--frequency_rank', '-fr', type=int, default=30000)
     args = parser.parse_args()
 
-    paths = []
+    path_count = Counter()
     with open('corpus/id_triples', 'r') as f:
         for line in f:
             w1, w2, path = line.strip().split('\t')
             path_id = int(path)
 
-            paths.append(path_id)
+            path_count.update(path_id)
 
     with open('corpus/id_to_path.dump', 'rb') as f:
         id_to_path = pickle.load(f)
 
-    path_count = Counter(paths)
     target_path_id = [i[0] for i in path_count.most_common()[:args.frequency_rank]]
     target_path_counts = [path_count[i] for i in target_path_id]
     target_path = [id_to_path[path_id] for path_id in target_path_id]
