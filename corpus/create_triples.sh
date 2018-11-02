@@ -14,7 +14,7 @@ python term_to_id_make.py $wiki_dump_file
 
 for x in {a..t}
 do
-( awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file""_a"$x"_parsed" > paths"_a"$x ) &
+( awk -v OFS='\t' '{i[$3]++} END{for(x in i){print x, i[x]}}' "$wiki_dump_file""_a"$x"_parsed" > paths"_a"$x )
 done
 wait
 
